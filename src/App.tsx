@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard';
 import Goals from './components/Goals';
 import Habits from './components/Habits';
 import Journal from './components/Journal';
+import VoiceAssistant from './components/VoiceAssistant';
 
 type View = 'dashboard' | 'goals' | 'habits' | 'journal';
 
@@ -98,6 +99,8 @@ export default function App() {
         {view === 'habits' && <Habits app={app} />}
         {view === 'journal' && <Journal app={app} />}
       </main>
+
+      <VoiceAssistant app={app} />
     </div>
   );
 }
