@@ -90,6 +90,13 @@ export function useAppData() {
     }));
   }, []);
 
+  const updateJournalEntry = useCallback((id: string, patch: Partial<JournalEntry>) => {
+    setData((d) => ({
+      ...d,
+      journal: d.journal.map((j) => (j.id === id ? { ...j, ...patch } : j)),
+    }));
+  }, []);
+
   const deleteJournalEntry = useCallback((id: string) => {
     setData((d) => ({ ...d, journal: d.journal.filter((j) => j.id !== id) }));
   }, []);
@@ -103,6 +110,7 @@ export function useAppData() {
     deleteHabit,
     toggleHabitDate,
     addJournalEntry,
+    updateJournalEntry,
     deleteJournalEntry,
   };
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { LayoutDashboard, Target, Repeat, BookOpen, Moon, Sun, Sparkles } from 'lucide-react';
+import { Home, Target, Repeat, BookOpen, Moon, Sun, Sparkles } from 'lucide-react';
 import { useAppData } from './storage';
 import Dashboard from './components/Dashboard';
 import Goals from './components/Goals';
@@ -8,8 +8,8 @@ import Journal from './components/Journal';
 
 type View = 'dashboard' | 'goals' | 'habits' | 'journal';
 
-const NAV: { id: View; label: string; icon: typeof LayoutDashboard }[] = [
-  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+const NAV: { id: View; label: string; icon: typeof Home }[] = [
+  { id: 'dashboard', label: 'Home', icon: Home },
   { id: 'goals', label: 'Goals', icon: Target },
   { id: 'habits', label: 'Habits', icon: Repeat },
   { id: 'journal', label: 'Journal', icon: BookOpen },
