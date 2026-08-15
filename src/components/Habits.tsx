@@ -32,8 +32,8 @@ export default function Habits({ app }: { app: ReturnType<typeof useAppData> }) 
           No habits tracked yet. Add one to start building streaks.
         </div>
       ) : (
-        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden">
-          <div className="grid" style={{ gridTemplateColumns: '1fr repeat(7, 40px) 56px 40px' }}>
+        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-x-auto">
+          <div className="grid min-w-[560px]" style={{ gridTemplateColumns: 'minmax(160px, 1fr) repeat(7, 40px) 56px 40px' }}>
             <div className="px-4 py-3 text-xs font-medium text-slate-500 dark:text-slate-400">Habit</div>
             {days.map((d) => (
               <div key={d} className="px-1 py-3 text-xs font-medium text-slate-400 text-center">
@@ -69,12 +69,10 @@ function HabitRow({
   onDelete: (id: string) => void;
 }) {
   const streak = calcStreak(habit);
+  const cellClass = 'border-t border-slate-100 dark:border-slate-800';
   return (
-    <div
-      className="grid items-center border-t border-slate-100 dark:border-slate-800"
-      style={{ gridTemplateColumns: '1fr repeat(7, 40px) 56px 40px' }}
-    >
-      <div className="px-4 py-3 flex items-center gap-2 min-w-0">
+    <>
+      <div className={`${cellClass} px-4 py-3 flex items-center gap-2 min-w-0`}>
         <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: habit.color }} />
         <span className="text-sm font-medium truncate">{habit.name}</span>
       </div>
@@ -82,7 +80,7 @@ function HabitRow({
         const done = habit.completedDates.includes(d);
         const isFuture = d > today;
         return (
-          <div key={d} className="flex justify-center py-2">
+          <div key={d} className={`${cellClass} flex justify-center items-center py-2`}>
             <button
               disabled={isFuture}
               onClick={() => onToggle(habit.id, d)}
@@ -96,17 +94,17 @@ function HabitRow({
           </div>
         );
       })}
-      <div className="flex items-center justify-center gap-1 text-sm font-medium text-amber-500">
+      <div className={`${cellClass} flex items-center justify-center gap-1 text-sm font-medium text-amber-500`}>
         {streak > 0 && <Flame size={14} />}
         {streak}
       </div>
       <button
         onClick={() => onDelete(habit.id)}
-        className="text-slate-300 hover:text-red-500 transition-colors flex justify-center"
+        className={`${cellClass} text-slate-300 hover:text-red-500 transition-colors flex justify-center items-center`}
       >
         <Trash2 size={15} />
       </button>
-    </div>
+    </>
   );
 }
 
